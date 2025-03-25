@@ -57,16 +57,16 @@ Now I'll create the ARCHITECTURE.md file:
 
 ## System Overview
 
-UNOS AI is built with a modular architecture that separates concerns between document processing, RAG (Retrieval-Augmented Generation), UI components, and voice interaction.
+UNOS AI is built with a modular architecture that separates concerns between document processing, RAG (Retrieval-Augmented Generation), UI components, and optional voice interaction. The system is designed to work primarily with text input, with voice capabilities as an optional enhancement.
 
 ```mermaid
 graph TD
     A[User Interface] --> B[Document Processing]
     A --> C[RAG Engine]
-    A --> D[Voice Interaction]
+    A -.-> D[Optional Voice Interaction]
     B --> C
     C --> A
-    D --> A
+    D -.-> A
  ```
 ```
 
@@ -99,13 +99,11 @@ Voice capabilities are implemented through:
 - Text-to-speech using Google TTS (gTTS)
 - Audio device management for microphone and speaker selection
 ```mermaid
-graph TD
-    A[Voice Input] --> B[Speech Recognition]
-    B --> C[Text Processing]
-    C --> D[RAG Engine]
-    D --> E[Response Generation]
-    E --> F[Text-to-Speech]
-    F --> G[Voice Output]
+graph LR
+    A[User Query] --> B[Document Search]
+    B --> C[Context Retrieval]
+    C --> D[Response Generation]
+    D --> E[Response to User]
  ```
 
 ## Data Flow
