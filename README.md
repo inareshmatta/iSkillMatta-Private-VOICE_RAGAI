@@ -1,14 +1,9 @@
 # UNOS AI Assistant
 
-<div align="center">
-  <img src="https://via.placeholder.com/200x200.png?text=UNOS+AI" alt="UNOS AI Logo" width="200"/>
-  <p><em>Your documents, intelligently answered</em></p>
-
   [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
   [![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-FF4B4B.svg)](https://streamlit.io/)
   [![PyTorch](https://img.shields.io/badge/PyTorch-2.0.1-EE4C2C.svg)](https://pytorch.org/)
   [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-</div>
 
 ## 🌟 Features
 
@@ -19,7 +14,10 @@
 
 ### 🧠 AI Capabilities
 - **Local LLM Integration**: Uses DeepSeek-R1 and Gemma-3B models for privacy and speed
-- **Retrieval-Augmented Generation (RAG)**: Combines document retrieval with generative AI
+- **Hybrid RAG Architecture**: 
+  - Local Retrieval-Augmented Generation (RAG)
+  - Offline Document Processing
+  - Optional Online Components
 - **Customizable Parameters**: Adjust context length, temperature, and other generation settings
 
 ### 💻 User Experience
@@ -29,8 +27,81 @@
 
 ### 🎤 Voice Interaction (Optional)
 - **Voice Input**: Ask questions using your microphone
-- **Voice Output**: Have responses read aloud with natural-sounding speech
+- **Voice Output**: 
+  - Optional Text-to-Speech (TTS)
+  - Uses Google TTS (online service)
 - **Device Selection**: Choose from available microphones and speakers
+
+## 🔍 System Architecture
+
+### Component Flow
+```mermaid
+flowchart TB
+    A[User Interaction] --> B{Input Type}
+    B -->|Text| C[Local Text Processing]
+    B -->|Voice| D[Speech Recognition]
+    
+    C --> E[Document Search]
+    D --> E
+    
+    E --> F[Context Retrieval]
+    F --> G[Local RAG Engine]
+    G --> H[Response Generation]
+    
+    H --> I{Output Mode}
+    I -->|Text| J[Display Response]
+    I -->|Voice| K[Optional Online TTS]
+    
+    subgraph RAG Features
+        direction LR
+        LocalRAG[Local Document Indexing]
+        LocalModel[Offline Language Models]
+        OnlineTTS[Optional Online TTS]
+    end
+    
+    style A fill:#f9f3e0,stroke:#333,stroke-width:2px
+    style B fill:#e6f2ff,stroke:#333,stroke-width:2px
+    style E fill:#d9ead3,stroke:#333,stroke-width:2px
+    style H fill:#f0e68c,stroke:#333,stroke-width:2px
+    style I fill:#98fb98,stroke:#333,stroke-width:2px
+```
+
+### System Mindmap
+```mermaid
+mindmap
+  root((UNOS AI))
+    Architectural Components
+      Document Processing
+        Multi-Format Support
+          PDF Parsing
+          DOCX Parsing
+          CSV Handling
+          Excel Processing
+      Intelligence Layer
+        Retrieval Augmented Generation
+          Local Vector Database
+          Semantic Search
+          Contextual Retrieval
+        Language Models
+          DeepSeek-R1
+          Gemma-3B
+      User Interface
+        Interactive Chat
+        Document Management
+        Customization Options
+      Interaction Modes
+        Text Input
+        Voice Input
+        Optional Voice Output
+      Technology Stack
+        Frontend
+          Streamlit
+        Backend
+          PyTorch
+          Transformers
+        Search
+          FAISS Vector Database
+```
 
 ## 🚀 Getting Started
 
@@ -88,100 +159,18 @@ python -m streamlit run main.py
 - Configure voice settings if using speech features
 - Toggle between dark and light themes
 
-## 🏗️ Architecture
-UNOS AI follows a modular architecture with these key components:
-- Document Processing: Handles parsing and indexing of various file formats
-- RAG Engine: Manages document retrieval and context preparation
-- Language Models: Generates responses based on queries and context
-- UI Layer: Streamlit-based interface with responsive design
-- Voice System: Optional speech recognition and synthesis capabilities
-
-For more details, see [ARCHITECTURE.md](ARCHITECTURE.md).
-
-## 🔍 System Diagrams
-
-### Component Flow
-```mermaid
-flowchart LR
-    A[User Query] --> B[Document Search]
-    B --> C[Context Retrieval]
-    C --> D[Response Generation]
-    D --> E[Response to User]
-
-    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
-    style B fill:#eeeeee,stroke:#333,stroke-width:2px
-    style C fill:#dddddd,stroke:#333,stroke-width:2px
-    style D fill:#cccccc,stroke:#333,stroke-width:2px
-    style E fill:#b5ead7,stroke:#333,stroke-width:2px
-```
-
-### System Mindmap
-```mermaid
-mindmap
-  root((UNOS AI))
-    Core Components
-      Document RAG
-        Document Processing
-          PDF Parser
-          DOCX Parser
-          TXT Parser
-          XLSX Parser
-        Vector Database
-          FAISS Index
-          Embeddings
-        Context Retrieval
-          Semantic Search
-          Relevance Ranking
-        Response Generation
-          LLM Integration
-            DeepSeek-R1
-            Gemma-3B
-          Context Injection
-          Citation Generation
-      User Interface
-        Streamlit Frontend
-          Chat Interface
-          Document Upload
-          Settings Panel
-        Theme Management
-          Dark Mode
-          Light Mode
-        Session State
-          Chat History
-          User Preferences
-      Voice System
-        Speech Recognition
-          Google Speech API
-          Fallback Systems
-        Text-to-Speech
-          Google TTS
-          Voice Settings
-        Audio Device Management
-          Microphone Selection
-          Speaker Selection
-    Data Flow
-      Input Processing
-        Text Input
-        Voice Input
-      Document Indexing
-        Text Extraction
-        Chunking
-        Embedding Generation
-      Query Processing
-        Context Retrieval
-        Response Generation
-      Output Handling
-        Text Display
-        Voice Output
-```
+## 🏗️ Key Architecture Highlights
+- **Local-First Approach**: Prioritizes user privacy and offline capabilities
+- **Flexible RAG Engine**: Adaptable to various document types and query needs
+- **Modular Design**: Easy to extend and customize
 
 ## 🛠️ Technologies Used
 - Streamlit
 - PyTorch
 - Transformers
 - FAISS
-- Google Speech
-- Google TTS
+- Google Speech (Optional)
+- Google TTS (Optional)
 - NumPy
 - Pillow
 
@@ -201,4 +190,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with Streamlit
 - Powered by DeepSeek and Gemma language models
 - Uses FAISS for vector search
-- Speech recognition powered by Google Speech API
+- Optional speech features powered by Google APIs
