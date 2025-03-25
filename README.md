@@ -1,19 +1,20 @@
 # UNOS AI Assistant
 
-  [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)  
-  [![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-FF4B4B.svg)](https://streamlit.io/)  
-  [![PyTorch](https://img.shields.io/badge/PyTorch-2.0.1-EE4C2C.svg)](https://pytorch.org/)  
-  [![Transformers](https://img.shields.io/badge/Transformers-4.38.1-FFD700.svg)](https://huggingface.co/docs/transformers/)  
-  [![FAISS](https://img.shields.io/badge/FAISS-1.7.4-0052CC.svg)](https://faiss.ai/)  
-  [![gTTS](https://img.shields.io/badge/gTTS-Latest-FF69B4.svg)](https://pypi.org/project/gTTS/)  
-  [![DeepSeekR1](https://img.shields.io/badge/DeepSeekR1-Supported-9400D3.svg)](https://deepseek.com/)  
-  [![Gemma3](https://img.shields.io/badge/Gemma3-Supported-008000.svg)](https://ai.google.dev/gemma)  
-  [![NumPy](https://img.shields.io/badge/NumPy-1.26.4-013243.svg)](https://numpy.org/)  
-  [![Pillow](https://img.shields.io/badge/Pillow-10.2.0-ffa500.svg)](https://pypi.org/project/Pillow/)  
-  [![Google Speech](https://img.shields.io/badge/Google_Speech-Optional-4285F4.svg)](https://cloud.google.com/speech-to-text)  
-  [![Google TTS](https://img.shields.io/badge/Google_TTS-Optional-34A853.svg)](https://cloud.google.com/text-to-speech)  
+  [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/) 
+  [![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-FF4B4B.svg)](https://streamlit.io/) 
+  [![PyTorch](https://img.shields.io/badge/PyTorch-2.0.1-EE4C2C.svg)](https://pytorch.org/) 
+  [![Transformers](https://img.shields.io/badge/Transformers-4.38.1-FFD700.svg)](https://huggingface.co/docs/transformers/) 
+  [![FAISS](https://img.shields.io/badge/FAISS-1.7.4-0052CC.svg)](https://faiss.ai/) 
+  [![gTTS](https://img.shields.io/badge/gTTS-Latest-FF69B4.svg)](https://pypi.org/project/gTTS/) 
+  [![DeepSeekR1](https://img.shields.io/badge/DeepSeekR1-Supported-9400D3.svg)](https://deepseek.com/) 
+  [![Gemma3](https://img.shields.io/badge/Gemma3-Supported-008000.svg)](https://ai.google.dev/gemma) 
+  [![NumPy](https://img.shields.io/badge/NumPy-1.26.4-013243.svg)](https://numpy.org/) 
+  [![Pillow](https://img.shields.io/badge/Pillow-10.2.0-ffa500.svg)](https://pypi.org/project/Pillow/) 
+  [![Google Speech](https://img.shields.io/badge/Google_Speech-Optional-4285F4.svg)](https://cloud.google.com/speech-to-text) 
+  [![Google TTS](https://img.shields.io/badge/Google_TTS-Optional-34A853.svg)](https://cloud.google.com/text-to-speech) 
   [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
-  
+
+
 
 ## 🌟 Features
 
