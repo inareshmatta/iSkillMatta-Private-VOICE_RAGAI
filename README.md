@@ -1,74 +1,102 @@
-# UNOS AI Assistant
-UNOS AI is an advanced document-based question answering system with voice interaction capabilities. It allows users to upload documents, ask questions about their content, and receive AI-generated responses with optional voice output.
-
-## Features
-- Document Processing : Upload and process various document formats (PDF, DOCX, TXT, etc.)
-- AI-Powered Responses : Get accurate answers based on your document content
-- Voice Interaction : Ask questions using your voice and hear responses
-- Multiple LLM Support : Switch between different language models
-- Dark/Light Mode : Choose your preferred UI theme
-- Customizable Audio Settings : Select microphones, speakers, and voice profiles
-## Screenshots
-## Installation
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/unos-ai.git
-cd unos-ai
- ```
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
- ```
-
-3. Run the application:
-```bash
-python -m streamlit run main.py
- ```
-
-## Usage
-1. Upload Documents : Use the sidebar to upload your documents
-2. Ask Questions : Type or speak your questions about the documents
-3. Get Answers : Receive AI-generated responses based on document content
-4. Voice Output : Toggle voice response to hear answers read aloud
-## Configuration
-- Model Selection : Choose between DeepSeek-R1 and Gemma-3B models
-- Audio Settings : Configure microphone and speaker settings
-- Voice Settings : Select text-to-speech engine and options
-- UI Theme : Toggle between dark and light mode
-## Requirements
-- Python 3.8+
-- See requirements.txt for all dependencies
-## Architecture
-See ARCHITECTURE.md for detailed system design information.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-- Built with Streamlit
-- Powered by DeepSeek and Gemma language models
-- Uses various open-source libraries for document processing and speech recognition
-Now I'll create the ARCHITECTURE.md file:
-
-```markdown
-# UNOS AI Architecture
+# UNOS AI System Architecture
 
 ## System Overview
 
-UNOS AI is built with a modular architecture that separates concerns between document processing, RAG (Retrieval-Augmented Generation), UI components, and optional voice interaction. The system is designed to work primarily with text input, with voice capabilities as an optional enhancement.
+UNOS AI is a document-based question answering system that combines local language models with retrieval-augmented generation (RAG) to provide accurate answers based on user-provided documents. The system supports both text and voice interaction as input/output methods.
+
+## Architecture Diagram
 
 ```mermaid
 graph TD
-    A[User Interface] --> B[Document Processing]
-    A --> C[RAG Engine]
-    A -.-> D[Optional Voice Interaction]
-    B --> C
-    C --> A
-    D -.-> A
- ```
-```
+    User[User] --> UI[Streamlit UI]
+    UI --> DocUpload[Document Upload]
+    UI --> QueryInput[Query Input]
+    UI --> VoiceSystem[Voice System]
+    
+    DocUpload --> DocProcessor[Document Processor]
+    DocProcessor --> Indexer[Document Indexer]
+    Indexer --> VectorDB[Vector Database]
+    
+    QueryInput --> RAG[RAG Engine]
+    VoiceSystem --> SpeechRecognition[Speech Recognition]
+    SpeechRecognition --> RAG
+    
+    RAG --> VectorDB
+    RAG --> LLM[Language Model]
+    RAG --> ResponseGen[Response Generator]
+    
+    ResponseGen --> UI
+    ResponseGen --> TTS[Text-to-Speech]
+    TTS --> VoiceSystem
+
+graph LR
+    A[User Query] --> B[Document Search]
+    B --> C[Context Retrieval]
+    C --> D[Response Generation]
+    D --> E[Response to User]
+    
+    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style B fill:#eeeeee,stroke:#333,stroke-width:2px
+    style C fill:#dddddd,stroke:#333,stroke-width:2px
+    style D fill:#cccccc,stroke:#333,stroke-width:2px
+    style E fill:#b5ead7,stroke:#333,stroke-width:2px
+
+mindmap
+  root((UNOS AI))
+    Core Components
+      Document RAG
+        Document Processing
+          PDF Parser
+          DOCX Parser
+          TXT Parser
+          XLSX Parser
+        Vector Database
+          FAISS Index
+          Embeddings
+        Context Retrieval
+          Semantic Search
+          Relevance Ranking
+        Response Generation
+          LLM Integration
+            DeepSeek-R1
+            Gemma-3B
+          Context Injection
+          Citation Generation
+      User Interface
+        Streamlit Frontend
+          Chat Interface
+          Document Upload
+          Settings Panel
+        Theme Management
+          Dark Mode
+          Light Mode
+        Session State
+          Chat History
+          User Preferences
+      Voice System
+        Speech Recognition
+          Google Speech API
+          Fallback Systems
+        Text-to-Speech
+          Google TTS
+          Voice Settings
+        Audio Device Management
+          Microphone Selection
+          Speaker Selection
+    Data Flow
+      Input Processing
+        Text Input
+        Voice Input
+      Document Indexing
+        Text Extraction
+        Chunking
+        Embedding Generation
+      Query Processing
+        Context Retrieval
+        Response Generation
+      Output Handling
+        Text Display
+        Voice Output
 
 ## Core Components
 ### 1. Document RAG (Retrieval-Augmented Generation)
@@ -77,57 +105,53 @@ The DocumentRAG class in app/core/document_rag.py is the central component that:
 - Processes and indexes uploaded documents
 - Searches for relevant context based on user queries
 - Generates responses using the selected language model
-```mermaid
-graph LR
-    A[User Query] --> B[Document Search]
-    B --> C[Context Retrieval]
-    C --> D[Response Generation]
-    D --> E[Response to User]
- ```
-
 ### 2. UI Components
 The UI is built with Streamlit and organized into modular components:
 
 - main.py : Application entry point and session state management
 - app/ui/styles.py : Custom CSS and theme management
 - app/ui/sidebar.py : Document upload and settings sidebar
-- app/ui/chat.py : Chat interface and voice interaction
+- app/ui/chat.py : Chat interface with optional voice capabilities
 ### 3. Voice Interaction System
-Voice capabilities are implemented through:
+Voice capabilities are implemented as optional features:
 
-- Speech recognition using Google Speech Recognition API with fallbacks
-- Text-to-speech using Google TTS (gTTS)
-- Audio device management for microphone and speaker selection
-```mermaid
-graph LR
-    A[User Query] --> B[Document Search]
-    B --> C[Context Retrieval]
-    C --> D[Response Generation]
-    D --> E[Response to User]
- ```
-
+- Voice Input : Optional microphone button to speak queries instead of typing
+- Voice Output : Optional toggle to have responses read aloud using Google TTS
+- Audio Settings : Configuration for microphones and speakers
 ## Data Flow
 1. User uploads documents through the sidebar
 2. Documents are processed and indexed by the RAG engine
-3. User asks a question via text or voice
+3. User asks a question via text input or optionally via voice
 4. System searches for relevant context in the indexed documents
 5. Language model generates a response based on the context
-6. Response is displayed to the user and optionally read aloud
+6. Response is displayed to the user as text
+7. Optionally, if voice output is enabled, the response is also read aloud
 ## Technology Stack
 - Frontend : Streamlit
 - Language Models : DeepSeek-R1, Gemma-3B
 - Embeddings : Sentence Transformers
 - Vector Search : FAISS
-- Speech Recognition : Google Speech API, with optional Whisper/Vosk fallbacks
-- Text-to-Speech : Google TTS (gTTS)
 - Document Processing : PyPDF2, python-docx, etc.
+- Voice Features :
+  - Speech Recognition : Google Speech API
+  - Text-to-Speech : Google TTS (gTTS)
 ## Design Patterns
 - Singleton Pattern : Session state management
 - Factory Pattern : Document processor selection based on file type
 - Strategy Pattern : Switching between different language models
 - Observer Pattern : UI updates based on state changes
-## Future Architecture Improvements
+## Future Improvements
 - Implement caching for faster response generation
 - Add distributed processing for handling larger document collections
 - Implement streaming responses for better user experience
 - Add user authentication and document persistence
+- Enhance voice recognition accuracy with custom models
+
+
+This comprehensive architecture document includes:
+1. A high-level system overview
+2. A detailed component diagram showing system interactions
+3. A linear flow diagram of the query process
+4. A mindmap of the entire system structure
+5. Detailed descriptions of core components
+6. Information about data flow, technology stack, and design patterns
