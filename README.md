@@ -1,3 +1,119 @@
+# UNOS AI Assistant
+
+<div align="center">
+  <img src="https://via.placeholder.com/200x200.png?text=UNOS+AI" alt="UNOS AI Logo" width="200"/>
+  <p><em>Your documents, intelligently answered</em></p>
+  
+  [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+  [![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-FF4B4B.svg)](https://streamlit.io/)
+  [![PyTorch](https://img.shields.io/badge/PyTorch-2.0.1-EE4C2C.svg)](https://pytorch.org/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+</div>
+
+## 🌟 Features
+
+### 📄 Document Intelligence
+- **Multi-format Support**: Process PDF, DOCX, TXT, XLSX, CSV, and more
+- **Smart Indexing**: Efficiently index and search through document content
+- **Context-aware Responses**: Get answers that reference specific parts of your documents
+
+### 🧠 AI Capabilities
+- **Local LLM Integration**: Uses DeepSeek-R1 and Gemma-3B models for privacy and speed
+- **Retrieval-Augmented Generation (RAG)**: Combines document retrieval with generative AI
+- **Customizable Parameters**: Adjust context length, temperature, and other generation settings
+
+### 💻 User Experience
+- **Intuitive Chat Interface**: Simple, conversational UI for asking questions
+- **Dark/Light Mode**: Choose your preferred visual theme
+- **Session Persistence**: Chat history and document indexes are preserved between sessions
+
+### 🎤 Voice Interaction (Optional)
+- **Voice Input**: Ask questions using your microphone
+- **Voice Output**: Have responses read aloud with natural-sounding speech
+- **Device Selection**: Choose from available microphones and speakers
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.8 or higher
+- Windows operating system
+- 8GB+ RAM recommended for optimal performance
+- GPU acceleration supported but not required
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/unos-ai.git
+cd unos-ai
+
+## 📖 Usage Guide
+### Document Management
+1. Click "Upload Documents" in the sidebar
+2. Select one or more files to upload
+3. Wait for the indexing process to complete
+4. Use the document browser to view uploaded files
+### Asking Questions
+1. Type your question in the chat input field
+2. Press Enter or click the send button
+3. View the AI-generated response with citations
+4. Continue the conversation with follow-up questions
+### Voice Interaction
+1. Click the microphone button to activate voice input
+2. Speak your question clearly
+3. Toggle "Enable Voice Output" to have responses read aloud
+4. Use the stop button to interrupt voice input/output
+### Settings & Customization
+1. Select your preferred language model
+2. Adjust RAG parameters for retrieval precision
+3. Configure voice settings if using speech features
+4. Toggle between dark and light themes
+## 🏗️ Architecture
+UNOS AI follows a modular architecture with these key components:
+
+- Document Processing : Handles parsing and indexing of various file formats
+- RAG Engine : Manages document retrieval and context preparation
+- Language Models : Generates responses based on queries and context
+- UI Layer : Streamlit-based interface with responsive design
+- Voice System : Optional speech recognition and synthesis capabilities
+For more details, see ARCHITECTURE.md .
+
+## 🛠️ Technologies Used
+Streamlit
+
+PyTorch
+
+Transformers
+
+FAISS Google Speech
+
+Google TTS
+
+NumPy
+
+Pillow
+
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch ( git checkout -b feature/amazing-feature )
+3. Commit your changes ( git commit -m 'Add some amazing feature' )
+4. Push to the branch ( git push origin feature/amazing-feature )
+5. Open a Pull Request
+## 📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+- Built with Streamlit
+- Powered by DeepSeek and Gemma language models
+- Uses FAISS for vector search
+- Speech recognition powered by Google Speech API
+```plaintext
+
+I've also updated the ARCHITECTURE.md file to ensure proper rendering of the diagrams:
+
+```markdown:c%3A%5CUsers%5Cinare%5CDownloads%5Cuploaded_docs%5Ctest%5CARCHITECTURE.md
 # UNOS AI System Architecture
 
 ## System Overview
@@ -7,7 +123,7 @@ UNOS AI is a document-based question answering system that combines local langua
 ## Architecture Diagram
 
 ```mermaid
-graph TD
+flowchart TD
     User[User] --> UI[Streamlit UI]
     UI --> DocUpload[Document Upload]
     UI --> QueryInput[Query Input]
@@ -28,8 +144,17 @@ graph TD
     ResponseGen --> UI
     ResponseGen --> TTS[Text-to-Speech]
     TTS --> VoiceSystem
+    
+    style User fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style UI fill:#d0f0c0,stroke:#333,stroke-width:2px
+    style RAG fill:#f0e68c,stroke:#333,stroke-width:2px
+    style LLM fill:#add8e6,stroke:#333,stroke-width:2px
+ ```
+```
 
-graph LR
+## Component Flow
+```mermaid
+flowchart LR
     A[User Query] --> B[Document Search]
     B --> C[Context Retrieval]
     C --> D[Response Generation]
@@ -40,7 +165,11 @@ graph LR
     style C fill:#dddddd,stroke:#333,stroke-width:2px
     style D fill:#cccccc,stroke:#333,stroke-width:2px
     style E fill:#b5ead7,stroke:#333,stroke-width:2px
+ ```
+```
 
+## System Mindmap
+```mermaid
 mindmap
   root((UNOS AI))
     Core Components
@@ -97,6 +226,7 @@ mindmap
       Output Handling
         Text Display
         Voice Output
+ ```
 
 ## Core Components
 ### 1. Document RAG (Retrieval-Augmented Generation)
@@ -127,14 +257,22 @@ Voice capabilities are implemented as optional features:
 6. Response is displayed to the user as text
 7. Optionally, if voice output is enabled, the response is also read aloud
 ## Technology Stack
-- Frontend : Streamlit
-- Language Models : DeepSeek-R1, Gemma-3B
-- Embeddings : Sentence Transformers
-- Vector Search : FAISS
-- Document Processing : PyPDF2, python-docx, etc.
-- Voice Features :
-  - Speech Recognition : Google Speech API
-  - Text-to-Speech : Google TTS (gTTS)
+Category Technologies Frontend
+
+Streamlit Language Models
+
+DeepSeek-R1, Gemma-3B Embeddings
+
+Sentence Transformers Vector Search
+
+FAISS Document Processing
+
+PyPDF2, python-docx, openpyxl, BeautifulSoup4 Speech Recognition
+
+Google Speech API Text-to-Speech
+
+Google TTS (gTTS)
+
 ## Design Patterns
 - Singleton Pattern : Session state management
 - Factory Pattern : Document processor selection based on file type
@@ -146,12 +284,8 @@ Voice capabilities are implemented as optional features:
 - Implement streaming responses for better user experience
 - Add user authentication and document persistence
 - Enhance voice recognition accuracy with custom models
+```plaintext
 
-
-This comprehensive architecture document includes:
-1. A high-level system overview
-2. A detailed component diagram showing system interactions
-3. A linear flow diagram of the query process
-4. A mindmap of the entire system structure
-5. Detailed descriptions of core components
-6. Information about data flow, technology stack, and design patterns
+These files now use proper Mermaid syntax for diagrams, include beautiful formatting with badges, tables, and emoji icons, and properly showcase the technologies used in your project.
+ ```
+```
